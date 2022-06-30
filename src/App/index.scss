@@ -1,0 +1,20 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+
+.app {
+  .app__battle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
+    flex-direction: row;
+    background: url("../Images/forest.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .app__keyboard {
+  }
+}

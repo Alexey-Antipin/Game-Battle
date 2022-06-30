@@ -1,0 +1,23 @@
+.keyboard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 157px;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  .keyboard__button {
+    height: 50px;
+    width: 300px;
+    border: 3px solid rgba(246, 19, 19, 0.432);
+    background-color: rgb(255, 202, 145);
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 10px;
+    font-family: "Courier New", Courier, monospace;
+  }
+  .keyboard__button:hover {
+    background-color: rgb(255, 168, 74);
+  }
+}
