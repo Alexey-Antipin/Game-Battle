@@ -1,8 +1,29 @@
-.player__ally {
-  height: 250px;
-  width: 250px;
-  font-size: 25px;
-  border-radius: 25px;
-  border: 2px solid rgb(228, 120, 58);
-  background-color: rgba(142, 201, 142, 0.406);
+.player {
+  .player__name {
+    font-size: 25px;
+    font-family: "Courier New", Courier, monospace;
+    text-align: center;
+    color: orange;
+  }
+  .player__ally {
+    height: 250px;
+    width: 250px;
+    font-size: 25px;
+    border-radius: 25px;
+    border: 2px solid rgb(228, 120, 58);
+    background-color: rgba(142, 201, 142, 0.406);
+  }
+  .player__block {
+    font-size: 25px;
+    font-family: "Courier New", Courier, monospace;
+    text-align: center;
+    .player__text {
+      display: inline-block;
+      color: orange;
+    }
+    .player__health {
+      display: inline-block;
+      color: red;
+    }
+  }
 }

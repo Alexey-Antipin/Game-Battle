@@ -1,12 +1,14 @@
-.talk{
-    font-size: 25px;
-    font-family: 'Courier New', Courier, monospace;
-    margin: 5px;
-    .talk__name{
-        text-align: center;
-        color: red;
-    }
-    .talk__name-fight{
-        color: red;
-    }
+.talk {
+  font-size: 25px;
+  font-family: "Courier New", Courier, monospace;
+  margin: 5px;
+  .talk__name {
+    text-align: center;
+    color: red;
+  }
+  .talk__name-fight {
+    text-align: center;
+    color: red;
+    width: 320px;
+  }
 }

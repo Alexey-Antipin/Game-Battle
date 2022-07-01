@@ -1,0 +1,28 @@
+.gameover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  height: 120%;
+  width: 100%;
+  background: rgba(92, 73, 73, 0.184);
+  .gameover__block {
+    background: rgb(0, 0, 0);
+    .gameover__text {
+      font-size: 25px;
+      font-family: "Courier New", Courier, monospace;
+      text-align: center;
+      color: rgb(211, 194, 227);
+    }
+    .gameover__button {
+      height: 50px;
+      width: 300px;
+      font-size: 25px;
+      background: rgb(223, 205, 205);
+      font-family: "Courier New", Courier, monospace;
+    }
+    .gameover__button:hover {
+      background: rgb(176, 170, 170);
+    }
+  }
+}

@@ -27,14 +27,30 @@ const initialState = {
       cooldown: 2,
     },
   ],
+  randomNumber: 0,
 };
 
 export const reducerEnemy = (state = initialState, action) => {
   switch (action.type) {
-    case "SOMETHING":
+    case "ENEMY_RANDOM_NUMBER":
       return {
         ...state,
-        name: action.payload,
+        randomNumber: action.payload,
+      };
+    case "ENEMY_LIVE_PHYSICAL":
+      return {
+        ...state,
+        maxHealth: state.maxHealth - action.payload,
+      };
+    case "ENEMY_LIVE_MAGIC":
+      return {
+        ...state,
+        maxHealth: state.maxHealth - action.payload,
+      };
+    case "ENEMY_LIVE":
+      return {
+        ...state,
+        maxHealth: action.payload,
       };
 
     default:

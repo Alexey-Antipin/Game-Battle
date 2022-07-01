@@ -6,8 +6,10 @@ export const Talk = () => {
 
   return (
     <div className="talk">
-      <div className="talk__name">{enemy.name}</div>
-      <div className="talk__name-fight">{enemy.moves[1].name}</div>
+      <div className="talk__name">Атака</div>
+      <div className="talk__name-fight">
+        {enemy.moves[enemy.randomNumber].name}
+      </div>
     </div>
   );
 };

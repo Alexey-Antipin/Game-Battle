@@ -39,8 +39,21 @@ const initialState = {
 
 export const reducerAlly = (state = initialState, action) => {
   switch (action.type) {
-    case "SOMETHING":
-      break;
+    case "HERO_LIVE_PHYSICAL":
+      return {
+        ...state,
+        maxHealth: state.maxHealth - action.payload,
+      };
+    case "HERO_LIVE_MAGIC":
+      return {
+        ...state,
+        maxHealth: state.maxHealth - action.payload,
+      };
+    case "HERO_LIVE":
+      return {
+        ...state,
+        maxHealth: action.payload,
+      };
 
     default:
       return state;
