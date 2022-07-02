@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./index.scss";
 
@@ -8,10 +8,60 @@ export const Keyboard = () => {
   const [cooldown_1, setCoolDown_1] = useState(4);
   const [cooldown_2, setCoolDown_2] = useState(3);
   const [cooldown_3, setCoolDown_3] = useState(4);
+  const coolDown = [0, cooldown_1, cooldown_2, cooldown_3];
+  const [cooldownEnemy_1, setCooldownEnemy_1] = useState(3);
+  const [cooldownEnemy_2, setCooldownEnemy_2] = useState(2);
 
-  const choiceFight = (event) => {
-    // Получаем id.
-    const index = event.currentTarget.id;
+  const logicEnemy = () => {
+    do {
+      let num = Math.floor(Math.random() * (2 + 1));
+
+      // Удар когтистой лапой.
+      if (num == 0) {
+        dispatch({
+          payload: num,
+          type: "ENEMY_RANDOM_NUMBER",
+        });
+        break;
+      }
+
+      // Огненное дыхание.
+      if (num == 1 && cooldownEnemy_1 == 3) {
+        dispatch({
+          payload: num,
+          type: "ENEMY_RANDOM_NUMBER",
+        });
+        break;
+      }
+
+      // Удар хвостом.
+      if (num == 2 && cooldownEnemy_2 == 2) {
+        dispatch({
+          payload: num,
+          type: "ENEMY_RANDOM_NUMBER",
+        });
+        break;
+      }
+      continue;
+    } while (false);
+
+    // Огненное дыхание.
+    if (enemy.randomNumber == 1 && cooldownEnemy_1 == 3) {
+      setCooldownEnemy_1(cooldownEnemy_1 - 3);
+    } else if (cooldownEnemy_1 < 3) {
+      setCooldownEnemy_1(cooldownEnemy_1 + 1);
+    }
+
+    // Удар хвостом.
+    if (enemy.randomNumber == 2 && cooldownEnemy_2 == 2) {
+      setCooldownEnemy_2(cooldownEnemy_2 - 2);
+    } else if (cooldownEnemy_2 < 2) {
+      setCooldownEnemy_2(cooldownEnemy_2 + 1);
+    }
+  };
+
+  const choiceFight = (index) => {
+    logicEnemy();
 
     // Нам наносят удар первым.
     let defenseHero = ally.moves[index].physicArmorPercents;
@@ -51,72 +101,49 @@ export const Keyboard = () => {
       });
     }
 
-    const response = Math.floor(Math.random() * (2 + 1));
-    dispatch({
-      payload: response,
-      type: "ENEMY_RANDOM_NUMBER",
-    });
     logic(index);
   };
 
   const logic = (index) => {
-    // id-1
+    // Вертушка левой пяткой.
     if (index == 1 && cooldown_1 == 4) {
       setCoolDown_1(cooldown_1 - 4);
-      console.log("1", cooldown_1);
-    } else if (index && cooldown_1 < 4) {
+    } else if (cooldown_1 < 4) {
       setCoolDown_1(cooldown_1 + 1);
-      console.log("1", cooldown_1);
     }
 
-    // id-2
+    // Каноничный фаербол.
     if (index == 2 && cooldown_2 == 3) {
       setCoolDown_2(cooldown_2 - 3);
-      console.log("2", cooldown_2);
-    } else if (index && cooldown_2 < 3) {
+    } else if (cooldown_2 < 3) {
       setCoolDown_2(cooldown_2 + 1);
-      console.log("2", cooldown_2);
     }
 
-    // id-3
+    // Магический блок.
     if (index == 3 && cooldown_3 == 4) {
       setCoolDown_3(cooldown_3 - 4);
-      console.log("3", cooldown_3);
-    } else if (index && cooldown_3 < 4) {
+    } else if (cooldown_3 < 4) {
       setCoolDown_3(cooldown_3 + 1);
-      console.log("3", cooldown_3);
     }
   };
 
+  useEffect(() => {
+    logicEnemy();
+  }, []);
+
   return (
     <div className="keyboard">
-      <button
-        id="0"
-        onClick={(event) => choiceFight(event)}
-        className="keyboard__button">
-        {ally.moves[0].name}
-      </button>
-      <button
-        id="1"
-        disabled={cooldown_1 !== 4}
-        onClick={(event) => choiceFight(event)}
-        className="keyboard__button">
-        {ally.moves[1].name}
-      </button>
-      <button
-        id="2"
-        disabled={cooldown_2 !== 3}
-        onClick={(event) => choiceFight(event)}
-        className="keyboard__button">
-        {ally.moves[2].name}
-      </button>
-      <button
-        id="3"
-        disabled={cooldown_3 !== 4}
-        onClick={(event) => choiceFight(event)}
-        className="keyboard__button">
-        {ally.moves[3].name}
-      </button>
+      {ally.moves.map((obj, index) => {
+        return (
+          <button
+            key={index}
+            disabled={coolDown[index] !== obj.cooldown}
+            onClick={() => choiceFight(index)}
+            className="keyboard__button">
+            {obj.name}
+          </button>
+        );
+      })}
     </div>
   );
 };

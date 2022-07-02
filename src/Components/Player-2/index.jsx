@@ -1,23 +1,9 @@
 import "./index.scss";
 import imageEnemy from "../../Images/scary-monster.png";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export const PlayerEnemy = () => {
-  const dispatch = useDispatch();
   const enemy = useSelector((state) => state.enemy);
-
-  useEffect(() => {
-    randomNumber();
-  }, []);
-
-  const randomNumber = () => {
-    const response = Math.floor(Math.random() * (2 + 1));
-    dispatch({
-      payload: response,
-      type: "ENEMY_RANDOM_NUMBER",
-    });
-  };
 
   return (
     <div className="player-2">
