@@ -1,23 +1,25 @@
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Context } from "../Context";
 import "./index.scss";
 
 export const Keyboard = () => {
   const dispatch = useDispatch();
   const { ally, enemy } = useSelector((state) => state);
-  const [cooldown_1, setCoolDown_1] = useState(4);
-  const [cooldown_2, setCoolDown_2] = useState(3);
-  const [cooldown_3, setCoolDown_3] = useState(4);
-  const coolDown = [0, cooldown_1, cooldown_2, cooldown_3];
-  const [cooldownEnemy_1, setCooldownEnemy_1] = useState(3);
-  const [cooldownEnemy_2, setCooldownEnemy_2] = useState(2);
+  const context = useContext(Context);
+  const coolDown = [
+    0,
+    context.cooldown_1,
+    context.cooldown_2,
+    context.cooldown_3,
+  ];
 
   const logicEnemy = () => {
     do {
       let num = Math.floor(Math.random() * (2 + 1));
 
       // Удар когтистой лапой.
-      if (num == 0) {
+      if (num === 0) {
         dispatch({
           payload: num,
           type: "ENEMY_RANDOM_NUMBER",
@@ -26,7 +28,11 @@ export const Keyboard = () => {
       }
 
       // Огненное дыхание.
-      if (num == 1 && cooldownEnemy_1 == 3) {
+      if (
+        num === 1 &&
+        context.cooldownEnemy_1 === 3 &&
+        enemy.randomNumber !== num
+      ) {
         dispatch({
           payload: num,
           type: "ENEMY_RANDOM_NUMBER",
@@ -35,7 +41,11 @@ export const Keyboard = () => {
       }
 
       // Удар хвостом.
-      if (num == 2 && cooldownEnemy_2 == 2) {
+      if (
+        num === 2 &&
+        context.cooldownEnemy_2 === 2 &&
+        enemy.randomNumber !== num
+      ) {
         dispatch({
           payload: num,
           type: "ENEMY_RANDOM_NUMBER",
@@ -43,20 +53,20 @@ export const Keyboard = () => {
         break;
       }
       continue;
-    } while (false);
+    } while (true);
 
     // Огненное дыхание.
-    if (enemy.randomNumber == 1 && cooldownEnemy_1 == 3) {
-      setCooldownEnemy_1(cooldownEnemy_1 - 3);
-    } else if (cooldownEnemy_1 < 3) {
-      setCooldownEnemy_1(cooldownEnemy_1 + 1);
+    if (enemy.randomNumber === 1 && context.cooldownEnemy_1 === 3) {
+      context.setCooldownEnemy_1(context.cooldownEnemy_1 - 3);
+    } else if (context.cooldownEnemy_1 < 3) {
+      context.setCooldownEnemy_1(context.cooldownEnemy_1 + 1);
     }
 
     // Удар хвостом.
-    if (enemy.randomNumber == 2 && cooldownEnemy_2 == 2) {
-      setCooldownEnemy_2(cooldownEnemy_2 - 2);
-    } else if (cooldownEnemy_2 < 2) {
-      setCooldownEnemy_2(cooldownEnemy_2 + 1);
+    if (enemy.randomNumber === 2 && context.cooldownEnemy_2 === 2) {
+      context.setCooldownEnemy_2(context.cooldownEnemy_2 - 2);
+    } else if (context.cooldownEnemy_2 < 2) {
+      context.setCooldownEnemy_2(context.cooldownEnemy_2 + 1);
     }
   };
 
@@ -106,24 +116,24 @@ export const Keyboard = () => {
 
   const logic = (index) => {
     // Вертушка левой пяткой.
-    if (index == 1 && cooldown_1 == 4) {
-      setCoolDown_1(cooldown_1 - 4);
-    } else if (cooldown_1 < 4) {
-      setCoolDown_1(cooldown_1 + 1);
+    if (index === 1 && context.cooldown_1 === 4) {
+      context.setCoolDown_1(context.cooldown_1 - 4);
+    } else if (context.cooldown_1 < 4) {
+      context.setCoolDown_1(context.cooldown_1 + 1);
     }
 
     // Каноничный фаербол.
-    if (index == 2 && cooldown_2 == 3) {
-      setCoolDown_2(cooldown_2 - 3);
-    } else if (cooldown_2 < 3) {
-      setCoolDown_2(cooldown_2 + 1);
+    if (index === 2 && context.cooldown_2 === 3) {
+      context.setCoolDown_2(context.cooldown_2 - 3);
+    } else if (context.cooldown_2 < 3) {
+      context.setCoolDown_2(context.cooldown_2 + 1);
     }
 
     // Магический блок.
-    if (index == 3 && cooldown_3 == 4) {
-      setCoolDown_3(cooldown_3 - 4);
-    } else if (cooldown_3 < 4) {
-      setCoolDown_3(cooldown_3 + 1);
+    if (index === 3 && context.cooldown_3 === 4) {
+      context.setCoolDown_3(context.cooldown_3 - 4);
+    } else if (context.cooldown_3 < 4) {
+      context.setCoolDown_3(context.cooldown_3 + 1);
     }
   };
 

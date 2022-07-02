@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Context } from "../Context";
 import "./index.scss";
 
 export const GameOver = () => {
   const [winer, setWiner] = useState();
   const dispatch = useDispatch();
   const ally = useSelector((state) => state.ally);
-
+  const context = useContext(Context);
+  
   const winPlayer = () => {
     if (ally.maxHealth <= 0) {
       setWiner("Вы проиграли!");
@@ -28,6 +30,11 @@ export const GameOver = () => {
       payload: 10,
       type: "ENEMY_LIVE",
     });
+    context.setCoolDown_1(4);
+    context.setCoolDown_2(3);
+    context.setCoolDown_3(4);
+    context.setCooldownEnemy_1(3);
+    context.setCooldownEnemy_2(2);
   };
 
   return (

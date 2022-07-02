@@ -11,6 +11,7 @@ export const PlayerEnemy = () => {
       <div className="player__enemy">
         <img
           src={imageEnemy}
+          alt={"img"}
           style={{ height: "97%", width: "100%" }}
         />
       </div>

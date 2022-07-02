@@ -11,6 +11,7 @@ export const PlayerAlly = () => {
       <div className="player__ally">
         <img
           src={imageAlly}
+          alt={"img"}
           style={{ height: "97%", width: "100%" }}
         />
       </div>
