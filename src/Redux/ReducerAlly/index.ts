@@ -1,4 +1,6 @@
-const initialState = {
+import { Action, InitialState } from "../../ts";
+
+const initialState: InitialState = {
   name: "Евстафий ",
   maxHealth: 10,
   moves: [
@@ -37,7 +39,7 @@ const initialState = {
   ],
 };
 
-export const reducerAlly = (state = initialState, action) => {
+export const reducerAlly = (state = initialState, action: Action) => {
   switch (action.type) {
     case "HERO_LIVE_PHYSICAL":
       return {

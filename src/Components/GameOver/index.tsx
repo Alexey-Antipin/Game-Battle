@@ -4,7 +4,7 @@ import { Context } from "../Context";
 import "./index.scss";
 
 export const GameOver = () => {
-  const [winer, setWiner] = useState();
+  const [winer, setWiner] = useState<string>();
   const dispatch = useDispatch();
   const ally = useSelector((state) => state.ally);
   const context = useContext(Context);

@@ -1,6 +1,6 @@
-import "./index.scss";
-import imageEnemy from "../../Images/scary-monster.png";
+import imageEnemy from "/scary-monster.png";
 import { useSelector } from "react-redux";
+import "./index.scss";
 
 export const PlayerEnemy = () => {
   const enemy = useSelector((state) => state.enemy);
@@ -15,6 +15,7 @@ export const PlayerEnemy = () => {
           style={{ height: "97%", width: "100%" }}
         />
       </div>
+      
       <div className="player__block">
         <div className="player__text">Здоровье:</div>
         <div className="player__health">{enemy.maxHealth}</div>

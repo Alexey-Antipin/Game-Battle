@@ -1,4 +1,6 @@
-const initialState = {
+import { Action, InitialState } from "../../ts";
+
+const initialState: InitialState = {
   name: "Лютый",
   maxHealth: 10,
   moves: [
@@ -30,7 +32,10 @@ const initialState = {
   randomNumber: 0,
 };
 
-export const reducerEnemy = (state = initialState, action) => {
+export const reducerEnemy = (
+  state = initialState,
+  action: Action
+) => {
   switch (action.type) {
     case "ENEMY_RANDOM_NUMBER":
       return {

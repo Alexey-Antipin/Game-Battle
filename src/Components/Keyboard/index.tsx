@@ -1,5 +1,5 @@
-import { useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useContext } from "react";
 import { Context } from "../Context";
 import "./index.scss";
 
@@ -70,7 +70,7 @@ export const Keyboard = () => {
     }
   };
 
-  const choiceFight = (index) => {
+  const choiceFight = (index:number) => {
     logicEnemy();
 
     // Нам наносят удар первым.
@@ -114,7 +114,7 @@ export const Keyboard = () => {
     logic(index);
   };
 
-  const logic = (index) => {
+  const logic = (index:number) => {
     // Вертушка левой пяткой.
     if (index === 1 && context.cooldown_1 === 4) {
       context.setCoolDown_1(context.cooldown_1 - 4);
@@ -143,7 +143,7 @@ export const Keyboard = () => {
 
   return (
     <div className="keyboard">
-      {ally.moves.map((obj, index) => {
+      {ally.moves.map((obj, index:number) => {
         return (
           <button
             key={index}

@@ -1,7 +1,6 @@
+import { composeWithDevTools } from "@redux-devtools/extension";
 import { combineReducers, createStore } from "redux";
-import { reducerAlly } from "../ReducerAlly";
-import { reducerEnemy } from "../ReducerEnemy";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { reducerEnemy, reducerAlly } from "../";
 
 const rootReducer = combineReducers({
   enemy: reducerEnemy,
