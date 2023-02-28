@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "../../Redux/Store";
 import { useEffect, useContext } from "react";
 import { Context } from "../Context";
 import "./index.scss";
 
 export const Keyboard = () => {
   const dispatch = useDispatch();
-  const { ally, enemy } = useSelector((state) => state);
+  const { ally, enemy } = useSelector((state: IRootState) => state);
   const context = useContext(Context);
   const coolDown = [
     0,
@@ -70,43 +71,43 @@ export const Keyboard = () => {
     }
   };
 
-  const choiceFight = (index:number) => {
+  const choiceFight = (index: number) => {
     logicEnemy();
 
     // Нам наносят удар первым.
-    let defenseHero = ally.moves[index].physicArmorPercents;
-    let fightEnemy = enemy.moves[enemy.randomNumber].physicalDmg;
-    let defenseHeroMagic = ally.moves[index].magicArmorPercents;
-    let fightEnemyMagic = enemy.moves[enemy.randomNumber].magicDmg;
+    let defenseHero = ally.moves[index]!.physicArmorPercents;
+    let fightEnemy = enemy.moves[enemy.randomNumber as number]!.physicalDmg;
+    let defenseHeroMagic = ally.moves[index]!.magicArmorPercents;
+    let fightEnemyMagic = enemy.moves[enemy.randomNumber as number]!.magicDmg;
 
     if (defenseHero - fightEnemy < 0) {
       dispatch({
-        payload: enemy.moves[enemy.randomNumber].physicalDmg,
+        payload: enemy.moves[enemy.randomNumber as number]!.physicalDmg,
         type: "HERO_LIVE_PHYSICAL",
       });
     } else if (defenseHeroMagic - fightEnemyMagic < 0) {
       dispatch({
-        payload: enemy.moves[enemy.randomNumber].magicDmg,
+        payload: enemy.moves[enemy.randomNumber as number]!.magicDmg,
         type: "HERO_LIVE_MAGIC",
       });
     }
 
     // Мы наносим удар.
     let defenseEnemy =
-      enemy.moves[enemy.randomNumber].physicArmorPercents;
-    let fightHero = ally.moves[index].physicalDmg;
+      enemy.moves[enemy.randomNumber as number]!.physicArmorPercents;
+    let fightHero = ally.moves[index]!.physicalDmg;
     let defenseEnemyMagic =
-      enemy.moves[enemy.randomNumber].magicArmorPercents;
-    let fightHeroMagic = ally.moves[index].magicDmg;
+      enemy.moves[enemy.randomNumber as number]!.magicArmorPercents;
+    let fightHeroMagic = ally.moves[index]!.magicDmg;
 
     if (defenseEnemy - fightHero < 0) {
       dispatch({
-        payload: ally.moves[index].physicalDmg,
+        payload: ally.moves[index]!.physicalDmg,
         type: "ENEMY_LIVE_PHYSICAL",
       });
     } else if (defenseEnemyMagic - fightHeroMagic < 0) {
       dispatch({
-        payload: ally.moves[index].magicDmg,
+        payload: ally.moves[index]!.magicDmg,
         type: "ENEMY_LIVE_MAGIC",
       });
     }
@@ -114,7 +115,7 @@ export const Keyboard = () => {
     logic(index);
   };
 
-  const logic = (index:number) => {
+  const logic = (index: number) => {
     // Вертушка левой пяткой.
     if (index === 1 && context.cooldown_1 === 4) {
       context.setCoolDown_1(context.cooldown_1 - 4);
@@ -143,14 +144,14 @@ export const Keyboard = () => {
 
   return (
     <div className="keyboard">
-      {ally.moves.map((obj, index:number) => {
+      {ally.moves.map((obj, index: number) => {
         return (
           <button
             key={index}
-            disabled={coolDown[index] !== obj.cooldown}
+            disabled={coolDown[index] !== obj!.cooldown }
             onClick={() => choiceFight(index)}
             className="keyboard__button">
-            {obj.name}
+            {obj!.name}
           </button>
         );
       })}

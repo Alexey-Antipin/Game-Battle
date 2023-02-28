@@ -6,4 +6,6 @@ const rootReducer = combineReducers({
   enemy: reducerEnemy,
   ally: reducerAlly,
 });
+
 export const store = createStore(rootReducer, composeWithDevTools());
+export type IRootState = ReturnType<typeof rootReducer>

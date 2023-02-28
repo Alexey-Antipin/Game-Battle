@@ -1,3 +1,4 @@
+import { IRootState } from "../Redux/Store";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import {
@@ -11,7 +12,7 @@ import {
 import "./index.scss";
 
 export const App = () => {
-  const { ally, enemy } = useSelector((state) => state);
+  const { ally, enemy } = useSelector((state: IRootState) => state);
   const [cooldownEnemy_1, setCooldownEnemy_1] = useState<number>(3);
   const [cooldownEnemy_2, setCooldownEnemy_2] = useState<number>(2);
   const [cooldown_1, setCoolDown_1] = useState<number>(4);
@@ -39,7 +40,7 @@ export const App = () => {
           <PlayerEnemy />
           {ally.maxHealth <= 0 || enemy.maxHealth <= 0 ? <GameOver /> : <></>}
         </div>
-        
+
         <div className="app__keyboard">
           <Keyboard />
         </div>

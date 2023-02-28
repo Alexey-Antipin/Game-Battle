@@ -1,9 +1,10 @@
+import { IRootState } from "../../Redux/Store";
 import imageEnemy from "/scary-monster.png";
 import { useSelector } from "react-redux";
 import "./index.scss";
 
 export const PlayerEnemy = () => {
-  const enemy = useSelector((state) => state.enemy);
+  const enemy = useSelector((state:IRootState) => state.enemy);
 
   return (
     <div className="player-2">

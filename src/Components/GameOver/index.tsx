@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { IRootState } from "../../Redux/Store";
 import { Context } from "../Context";
 import "./index.scss";
 
 export const GameOver = () => {
   const [winer, setWiner] = useState<string>();
-  const dispatch = useDispatch();
-  const ally = useSelector((state) => state.ally);
+  const ally = useSelector((state:IRootState) => state.ally);
   const context = useContext(Context);
+  const dispatch = useDispatch();
   
   const winPlayer = () => {
     if (ally.maxHealth <= 0) {

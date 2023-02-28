@@ -1,9 +1,10 @@
+import { IRootState } from "../../Redux/Store";
 import { useSelector } from "react-redux";
 import imageAlly from "/mag.png";
 import "./index.scss";
 
 export const PlayerAlly = () => {
-  const ally = useSelector((state) => state.ally);
+  const ally = useSelector((state:IRootState) => state.ally);
 
   return (
     <div className="player">
